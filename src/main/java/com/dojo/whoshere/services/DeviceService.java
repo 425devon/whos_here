@@ -18,4 +18,10 @@ public class DeviceService {
 	public List<Device> findAll() {
 		return deviceRepository.findAll();
 	}
+	
+	public void saveDevice(Device device) {
+		System.out.println(device);
+		System.out.println(device.getMacAddress());
+		deviceRepository.save(device);
+	}
 }

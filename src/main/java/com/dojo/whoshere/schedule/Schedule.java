@@ -5,12 +5,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.dojo.whoshere.models.Device;
+import com.dojo.whoshere.services.DeviceService;
+
 @Component
-public class Schedule {
-	@Scheduled(cron = "0 * * * * ?")
+public class Schedule {    
+    @Autowired
+	private DeviceService deviceService;
+	
+	@Scheduled(cron = "0,30 * * * * ?")
 	public void scheduledTask() {
 		System.out.println("scheduled job is starting");
 		try {
@@ -30,14 +38,19 @@ public class Schedule {
 			
 			//call dataCleaner to remove header and footer statements for arp scanner
 			List<String> cleanedData = dataCleaner(parsedData);
-			System.out.println(cleanedData);
-			
+			for(int i=0;i<cleanedData.size();i++) {
+				String[] fields = cleanedData.get(i).split("\t");
+				Device newDevice = new Device(fields[0], fields[1], fields[2]);
+				System.out.println(newDevice.getIpAddress());
+				System.out.println(newDevice.getNickName());
+				System.out.println(newDevice.getMacAddress());
+				//deviceService.saveDevice(newDevice);
+			}
 		} catch (IOException e) {
 			System.out.println("this was not the cli call you were looking for...");
 			e.printStackTrace();
 		}
 	}
-	
 	
 	public static List<String> dataCleaner(List<String> data) {
 		ArrayList<String> cleanData = (ArrayList<String>) data;

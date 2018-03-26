@@ -1,5 +1,6 @@
 package com.dojo.whoshere.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,6 +34,14 @@ public class Device {
 	private List<Scan> scans;
 	
 	public Device() {
+		this.createdAt = new Date();
+		this.scans = new ArrayList<Scan>();
+	}
+	
+	public Device(String ip, String mac, String nick) {
+		this.ipAddress = ip;
+		this.macAddress = mac;
+		this.nickName = nick;
 		this.createdAt = new Date();
 	}
 	

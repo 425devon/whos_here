@@ -37,7 +37,6 @@ public class Scan {
 	public Scan() {
 		this.createdAt = new Date();
 	}
-	
     
 	public Long getId() {
 		return id;
