@@ -2,7 +2,9 @@ package com.dojo.whoshere.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dojo.whoshere.services.DeviceService;
 
@@ -15,8 +17,15 @@ public class HomeController {
     }
     
     @RequestMapping(value= {"/", "", "/home"})
-    public String registerForm(Model model) {
+    public String index(Model model) {
     	model.addAttribute("devices", deviceService.findAll());
         return "homePage.jsp";
+    }
+    
+    @RequestMapping("/devices/{mac}")
+    public String device(Model model, @PathVariable("mac") String mac) {
+    	System.out.println(mac);
+    	model.addAttribute("device", deviceService.findByMacAddress(mac));
+    	return "devicePage.jsp";
     }
 }
