@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 
 import com.dojo.whoshere.models.Device;
 import com.dojo.whoshere.repositories.DeviceRepository;
+import com.dojo.whoshere.repositories.ScanRepository;
 
 @Service
 public class DeviceService {
 	private DeviceRepository deviceRepository;
+	private ScanRepository scanRepository;
 	
-	public DeviceService(DeviceRepository deviceRepository) {
+	public DeviceService(DeviceRepository deviceRepository, ScanRepository scanRepository) {
+		this.scanRepository = scanRepository;
 		this.deviceRepository = deviceRepository;
 	}
 
@@ -25,5 +28,9 @@ public class DeviceService {
 	
 	public void saveDevice(Device device) {
 		deviceRepository.save(device);
+	}
+	
+	public List<Object[]> getScanTimesById(Long id) {
+		return (List<Object[]>) scanRepository.getScanTimesById(id);
 	}
 }

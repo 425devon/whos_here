@@ -1,11 +1,12 @@
 package com.dojo.whoshere.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.dojo.whoshere.models.Device;
 import com.dojo.whoshere.services.DeviceService;
 
 @Controller
@@ -24,8 +25,10 @@ public class HomeController {
     
     @RequestMapping("/devices/{mac}")
     public String device(Model model, @PathVariable("mac") String mac) {
-    	System.out.println(mac);
-    	model.addAttribute("device", deviceService.findByMacAddress(mac));
+    	Device device = deviceService.findByMacAddress(mac);
+    	List<Object[]> scanDates = (List<Object[]>) deviceService.getScanTimesById(device.getId());
+    	model.addAttribute("scanDates", scanDates);
+    	model.addAttribute("device", device);
     	return "devicePage.jsp";
     }
 }

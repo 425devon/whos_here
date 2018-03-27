@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -41,10 +44,17 @@ public class Schedule {
 			
 			//call dataCleaner to remove header and footer statements for arp scanner
 			List<String> cleanedData = dataCleaner(parsedData);
+			Date date = new Date();
+			Calendar c = new GregorianCalendar();
+			c.setTime(date);
+			Long hourAsMillis = c.getTimeInMillis();
+			Long remainder = hourAsMillis % 3600000;
+			hourAsMillis -= remainder;
 			for(int i=0;i<cleanedData.size();i++) {
 				String[] fields = cleanedData.get(i).split("\t");
 				Scan scan = new Scan();
 				scan.setIpAddress(fields[0]);
+				scan.setHour(hourAsMillis / 1000);
 				Device existingDevice = deviceService.findByMacAddress(fields[1]);
 				if(existingDevice != null) {
 					existingDevice.setIpAddress(fields[0]);

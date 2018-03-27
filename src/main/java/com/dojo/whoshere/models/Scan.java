@@ -20,6 +20,7 @@ public class Scan {
 	private String ipAddress;
     @DateTimeFormat(pattern = "MM dd, yyyy")
 	private Date createdAt;
+    private Long hour;
     
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="device_id")
@@ -59,6 +60,14 @@ public class Scan {
 
 	public void setDevice(Device device) {
 		this.device = device;
+	}
+
+	public Long getHour() {
+		return hour;
+	}
+
+	public void setHour(Long hour) {
+		this.hour = hour;
 	}
 
 	@PrePersist
