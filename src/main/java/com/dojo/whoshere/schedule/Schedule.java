@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,7 +22,7 @@ public class Schedule {
 		this.deviceService = deviceService;
 	}
 	
-	@Scheduled(cron = "0,30 * * * * ?")
+	@Scheduled(cron = "0 * * * * ?")
 	public void scheduledTask() {
 		System.out.println("scheduled job is starting");
 		try {
@@ -50,10 +51,12 @@ public class Schedule {
 					existingDevice.setNickName(fields[2]);
 					scan.setDevice(existingDevice);
 					existingDevice.getScans().add(scan);
+					existingDevice.setUpdatedAt(new Date());
 					deviceService.saveDevice(existingDevice);
 				} else {
 					Device newDevice = new Device(fields[0], fields[1], fields[2]);
 					newDevice.getScans().add(scan);
+					newDevice.setUpdatedAt(new Date());
 					scan.setDevice(newDevice);
 					deviceService.saveDevice(newDevice);
 				}

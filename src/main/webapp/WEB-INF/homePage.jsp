@@ -8,19 +8,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+	.devBox{
+		border: 1px solid black;
+		display: inline-block;
+	}
+</style>
 <title>Who's Here</title>
 </head>
 <body>
 <h1>Devices</h1>
 <c:forEach items="${devices}" var="device">
-	<h3><c:out value="${device.macAddress}" /></h3>
-	<p><c:out value="${device.nickName} - ${device.ipAddress}" /></p>
-	<c:if test="${!device.nickName}">
-		<form action="/device/${device.id}/addnick" method="POST">
-			<input type="text" />
-			<input type="submit" value="add nickname" />
-		</form>
-	</c:if>
+	<div class="devBox">
+		<h3><c:out value="${device.macAddress}" /></h3>
+		<p><a href="${device.id}"><c:out value="${device.nickName} - ${device.ipAddress}" /></a></p>
+		<%-- <c:if test="${!device.nickName}">
+			<form action="/device/${device.id}/addnick" method="POST">
+				<input type="text" />
+				<input type="submit" value="add nickname" />
+			</form>
+		</c:if> --%>
+	</div>
 </c:forEach>
 </body>
 </html>
