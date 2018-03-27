@@ -16,7 +16,7 @@
 	<div class="container">
 		<c:forEach items="${devices}" var="device">
 			<div class="devBox">
-				<h3><a href="${device.id}"><c:out value="${device.macAddress}" /></a></h3>
+				<h3><a href="/devices/${device.macAddress}"><c:out value="${device.macAddress}" /></a></h3>
 				<h4><fmt:formatDate type = "date" value = "${device.updatedAt}" /></h4>
 				<h4><fmt:formatDate type = "time" value = "${device.updatedAt}" /></h4>
 				<p><c:out value="${device.nickName} - ${device.ipAddress}" /></p>
