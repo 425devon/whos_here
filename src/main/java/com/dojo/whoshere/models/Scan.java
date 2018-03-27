@@ -27,8 +27,6 @@ public class Scan {
 	private String ipAddress;
     @DateTimeFormat(pattern = "MM dd, yyyy")
 	private Date createdAt;
-    @DateTimeFormat(pattern = "MM dd, yyyy")
-	private Date updatedAt;
     
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="device_id")
@@ -62,14 +60,6 @@ public class Scan {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
 	public Device getDevice() {
 		return device;
 	}
@@ -81,10 +71,5 @@ public class Scan {
 	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
-    }
-    
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
     }
 }

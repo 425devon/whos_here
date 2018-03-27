@@ -19,9 +19,11 @@ public class DeviceService {
 		return deviceRepository.findAll();
 	}
 	
+	public Device findByMacAddress(String macAddress) {
+		return deviceRepository.findByMacAddress(macAddress);
+	}
+	
 	public void saveDevice(Device device) {
-		System.out.println(device);
-		System.out.println(device.getMacAddress());
 		deviceRepository.save(device);
 	}
 }

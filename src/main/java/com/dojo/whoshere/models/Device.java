@@ -30,7 +30,8 @@ public class Device {
     @DateTimeFormat(pattern = "MM dd, yyyy")
 	private Date updatedAt;
     
-	@OneToMany(mappedBy="device", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="device", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	@OneToMany(mappedBy="device", cascade=CascadeType.ALL)
 	private List<Scan> scans;
 	
 	public Device() {
@@ -42,6 +43,7 @@ public class Device {
 		this.ipAddress = ip;
 		this.macAddress = mac;
 		this.nickName = nick;
+		this.scans = new ArrayList<Scan>();
 		this.createdAt = new Date();
 	}
 	
