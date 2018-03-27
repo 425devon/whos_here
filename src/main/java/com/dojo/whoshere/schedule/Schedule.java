@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,11 @@ import com.dojo.whoshere.services.DeviceService;
 
 @Component
 public class Schedule {    
-    @Autowired
 	private DeviceService deviceService;
+	
+	public Schedule(DeviceService deviceService) {
+		this.deviceService = deviceService;
+	}
 	
 	@Scheduled(cron = "0,30 * * * * ?")
 	public void scheduledTask() {
@@ -44,7 +46,7 @@ public class Schedule {
 				System.out.println(newDevice.getIpAddress());
 				System.out.println(newDevice.getNickName());
 				System.out.println(newDevice.getMacAddress());
-				//deviceService.saveDevice(newDevice);
+				deviceService.saveDevice(newDevice);
 			}
 		} catch (IOException e) {
 			System.out.println("this was not the cli call you were looking for...");

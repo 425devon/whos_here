@@ -11,7 +11,7 @@ import com.dojo.whoshere.repositories.DeviceRepository;
 public class DeviceService {
 	private DeviceRepository deviceRepository;
 	
-	public DeviceService(DeviceRepository deviceRepostitory) {
+	public DeviceService(DeviceRepository deviceRepository) {
 		this.deviceRepository = deviceRepository;
 	}
 
