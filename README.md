@@ -13,14 +13,10 @@ mysql
 
 ### Installing
 
-clone repository
-import into IDE
-update Maven
-run as spring app
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+* clone repository
+* import into IDE
+* update Maven
+* run as spring app
 
 ## Built With
 
