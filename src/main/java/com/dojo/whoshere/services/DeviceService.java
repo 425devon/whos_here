@@ -34,6 +34,10 @@ public class DeviceService {
 		return (List<Object[]>) scanRepository.getScanTimesById(id);
 	}
 	
+	public List<Object[]> getScanTimesAllDevices() {
+		return (List<Object[]>) scanRepository.getScanTimesAllDevices();
+	}
+	
 	public List<Object[]> getTop10LastHour() {
 		return (List<Object[]>) scanRepository.getTop10LastHour();
 	}

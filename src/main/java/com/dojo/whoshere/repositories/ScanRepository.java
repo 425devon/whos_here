@@ -15,6 +15,9 @@ public interface ScanRepository extends CrudRepository<Scan, Long> {
 	@Query(value="SELECT hour, COUNT(*) FROM scans where device_id = ?1 GROUP BY hour", nativeQuery=true)
 	List<Object[]> getScanTimesById(Long id);
 	
+	@Query(value="SELECT hour, COUNT(*) FROM scansGROUP BY hour", nativeQuery=true)
+	List<Object[]> getScanTimesAllDevices();
+	
 	@Query(value="select devices.mac_address, count(*) from scans join devices on scans.device_id = devices.id where scans.created_at > date_sub(now(), INTERVAL 1 HOUR) group by scans.device_id order by count(*) DESC LIMIT 10", nativeQuery=true)
 	List<Object[]> getTop10LastHour();
 	
