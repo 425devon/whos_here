@@ -31,4 +31,14 @@ public class HomeController {
     	model.addAttribute("device", device);
     	return "devicePage.jsp";
     }
+    
+    @RequestMapping("/top")
+    public String top(Model model) {
+    	model.addAttribute("top10LastHour", deviceService.getTop10LastHour());
+    	model.addAttribute("top10LastDay", deviceService.getTop10LastDay());
+    	model.addAttribute("top10LastWeek", deviceService.getTop10LastWeek());
+    	model.addAttribute("top10LastMonth", deviceService.getTop10LastMonth());
+    	model.addAttribute("top10AllTime", deviceService.getTop10AllTime());
+		return "topPage.jsp";
+    }
 }

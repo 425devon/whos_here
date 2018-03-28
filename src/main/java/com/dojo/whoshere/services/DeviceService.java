@@ -33,4 +33,25 @@ public class DeviceService {
 	public List<Object[]> getScanTimesById(Long id) {
 		return (List<Object[]>) scanRepository.getScanTimesById(id);
 	}
+	
+	public List<Object[]> getTop10LastHour() {
+		return (List<Object[]>) scanRepository.getTop10LastHour();
+	}
+
+	public List<Object[]> getTop10LastDay() {
+		return (List<Object[]>) scanRepository.getTop10LastDay();
+	}
+	
+	public List<Object[]> getTop10LastWeek() {
+		return (List<Object[]>) scanRepository.getTop10LastWeek();
+	}
+	
+	public List<Object[]> getTop10LastMonth() {
+		return (List<Object[]>) scanRepository.getTop10LastMonth();
+	}
+	
+	public List<Object[]> getTop10AllTime() {
+		return (List<Object[]>) scanRepository.getTop10AllTime();
+	}
+	
 }
